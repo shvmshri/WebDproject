@@ -1,0 +1,141 @@
+html{
+    margin:0;
+    position: relative;
+    
+}
+body{
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    
+}
+/* section first */
+.first{
+    background-color: #e0ebe8;
+}
+
+/* navbar */
+
+
+
+.navbar{
+    padding: 2rem 6rem 2 6rem;
+   background-color: #e0ebe8;
+
+}
+
+.navbar-brand{
+    font-size:2.5rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: #45b29a  !important;
+    font-weight: bold;
+}
+.nav-item{
+    padding: 1rem 0.4rem;
+    font-size: 1.2rem;
+}
+.nav-link{
+    color: #45b29a !important;
+    font-family: 'Montserrat-light', sans-serif;
+
+}
+.nav-link:hover{
+    color: #22746b !important; 
+}
+/* intro */
+
+.intro{
+    height:550px;
+    width: 100%;
+    padding: 170px 95px 95px ;
+}
+.intro h1{
+ font-family: 'Ubuntu', sans-serif;
+ font-size: 3.5rem;
+ color: #45b29a;
+ font-weight: bold;
+}
+h1 span{
+    font-size: 2.5rem;
+}
+.intro p{
+    padding: 1rem;
+    color: #45b29a;
+    line-height: 2;
+    font-weight:bold;
+}
+
+/* Second Section */
+.second{
+    height: 48rem;
+}
+@media(max-width:991px) and (min-width:768px){
+    .second{
+        height: 75rem;
+    }
+}
+
+@media(max-width:766px){
+    .second{
+        height:120rem;
+    }
+}
+
+.Services h3{
+    padding: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: #45b29a;
+    font-size: 2.5rem;
+}
+
+.service{
+    margin: 1rem 0;
+    background-color: #e0ebe8;
+    height: 20rem;
+    padding-top: 4rem;
+}
+
+ a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+.icon{
+    color: #22746b ;
+}
+
+.service p{
+    margin: 1rem;
+    font-family:  'Merriweather', serif;
+    font-weight: bold;
+    color: #545454;
+}
+
+hr{
+    width: 20%;
+    border-color: #22746b;
+}
+
+/* third */
+
+.third{
+    background-color: #22746b;
+    margin: 1rem 0 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding:5rem 2rem 1rem
+}
+
+.third h3{
+    color: #fff;
+    font-size: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    margin: 0.5rem 2rem 2rem;
+}
+
+.third p{
+    color: #332e2e;
+    
+}
