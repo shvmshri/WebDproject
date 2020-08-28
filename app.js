@@ -29,10 +29,11 @@ app.get("/lostfound",function(req,res){
     res.render("Lost-Found");
 })
 
+// Cab share
 
-
-
-
+app.get("/cabshare/offer",function(req,res){
+    res.render('offer');
+})
 
 
 
