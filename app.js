@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
@@ -7,7 +9,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.set('view engine','ejs');
-mongoose.connect("mongodb+srv://Shivamshree:Myclusterpassword@cluster0.ncnhl.mongodb.net/IITK",{
+mongoose.connect("mongodb+srv://"+process.env.NAME+":"+ process.env.PASSWORD + "@cluster0.ncnhl.mongodb.net/IITK",{
     useNewUrlParser:true,useUnifiedTopology:true
 });
 
