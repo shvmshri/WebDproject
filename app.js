@@ -17,10 +17,6 @@ app.get("/buysell",function(req,res){
     res.render("Buy-Sell");
 })
 
-app.get("/cabshare",function(req,res){
-    res.render("Cab-Share");
-})
-
 app.get("/faculty",function(req,res){
     res.render("Faculty");
 })
@@ -30,10 +26,16 @@ app.get("/lostfound",function(req,res){
 })
 
 // Cab share
+app.get("/cabshare",function(req,res){
+    res.render("Cab-Share");
+});
+app.post("/cabshare",function(req,res){
+    console.log(req.body);
+})
 
 app.get("/cabshare/offer",function(req,res){
     res.render('offer');
-})
+});
 
 
 

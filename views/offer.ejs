@@ -1,18 +1,29 @@
 <%-include('partials/header')-%>
 <section class="cabsec container">
-    <form>
+    <form action="/cabshare" method="POST" autocomplete="off">
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label>Date of the ride</label>
+            <input type="date" class="form-control" placeholder="Enter date of your ride" name="date">
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label>Name</label>
+          <input type="text" class="form-control" placeholder="Your Name" name="name">
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" placeholder="Enter email" name="email">
+        </div>
+        <div class="form-group">
+            <label>Phone no.</label>
+            <input type="tel" class="form-control" placeholder="Enter Phone no." name="phone_no">
+        </div>
+        <div class="form-group">
+            <label>Destination</label>
+            <input type="text" class="form-control" placeholder="Destination for your ride" name="destination">
+        </div>
+        <div class="form-group">
+            <label>Approx. time of Departure</label>
+            <input type="time" class="form-control" placeholder="Enter approximate time for the departure" name="departure_time">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
