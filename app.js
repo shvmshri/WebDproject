@@ -15,26 +15,34 @@ mongoose.connect("mongodb+srv://"+process.env.NAME+":"+ process.env.PASSWORD + "
     useNewUrlParser:true,useUnifiedTopology:true
 });
 
-app.get("/",function(req,res,next){
+app.get("/",function(req,res){
     res.render("home");
 })
 
 app.get("/buysell",function(req,res){
-    res.render("Buy-Sell");
+    res.render("Buy-Sell/home");
 })
 
 app.get("/faculty",function(req,res){
-    res.render("Faculty");
+    res.render("Faculty/home");
 })
 
 app.get("/lostfound",function(req,res){
-    res.render("Lost-Found");
+    res.render("Lost-Found/home");
 })
-
-
+// cabshare
 app.get("/cabshare",function(req,res){
-    res.render("Cab-Share");
+    res.render("Cab-Share/home");
 });
+
+app.get("/cabshare/offer",function(req,res){
+    res.render('Cab-Share/offer');
+});
+
+app.get("/cabshare/find",function(req,res){
+    res.render("Cab-Share/findcab");
+});
+
 app.post("/cabshare/offer",function(req,res){
     const cab = new Cab({
         Date:req.body.date,
@@ -47,39 +55,34 @@ app.post("/cabshare/offer",function(req,res){
 
     cab.save()
     .then(()=>{
-        res.redirect("/cabshare");           //yahan success page pe redirect krna h 
-        console.log(req.body);
+        res.redirect("/cabshare");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
+        console.log(req.body);               //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
     })
     .catch((err)=>{
         res.send(false)
     })
-})
+});
 
-app.get("/cabshare/offer",function(req,res){
-    res.render('Cab-Share/offer');
-});
-app.get("/cabshare/find",function(req,res){
-    res.render("findcab");
-});
 app.post("/cabshare/find",function(req,res){
     var date = req.body.userdate;
     console.log(date);
     if(date===""){
        Cab.find(function(err,cabs){
-           if(!err) res.render('cabs_cards',{array:cabs});
-           else console.log(err)
+           if(!err) res.render('Cab-Share/cabs_cards',{array:cabs});
+           else console.log(err);
        })
 
     }
     else{
        Cab.find({Date:date},function(err,cabs){
-           if(!err) res.render('cabs_cards',{array:cabs});
+           if(!err) res.render('Cab-Share/cabs_cards',{array:cabs});
            else console.log(err);
        })
     }
     
 });
 
+//
 app.use((req,res,next)=>{
     res.send("NOT FOUND");
 })

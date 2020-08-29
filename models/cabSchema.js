@@ -11,8 +11,14 @@ var cab = new Schema({
         required:true
     },
     Email:String,
-    Phone_no:String,
-    Destination:String,
+    Phone_no:{
+        type:String,
+        required:true
+    },
+    Destination:{
+        type:String,
+        required:true
+    },
     Departure_time:String
 })
 

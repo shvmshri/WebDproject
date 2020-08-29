@@ -1,0 +1,31 @@
+<%-include('../partials/header')-%>
+<section class="cabsec">
+  <div class="container">
+    <% if(array.length === 0) {  %>
+      <h2>Oops! seems like nobody is travelling this day</h2>
+    <% } %> 
+    <% if(array.length != 0) { %>
+      <div class="row">
+      <% array.forEach(function(e){ %>
+          <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                  <%= e.Date %> 
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%=e.Name%> </h5>
+                  <h5 class="card-title"><%=e.Email%></h5>
+                  <h5 class="card-title"><%= e.Phone_no %> </h5>
+                  <p class="card-text">Going to <%= e.Destination %> at around <%= e.Departure_time %>  </p>
+                </div>
+              </div>
+          </div>
+        <% }) %>
+      </div>      
+      <h3>Could not find a suitable cab?</h3>
+    <% } %> 
+    <h4>No worries!</h4>
+    <h3>Offer your own</h3>
+    <a href="/cabshare/offer" class="btn btn-dark btn-lg">Offer a ride</a>
+  </div>
+</section>
