@@ -1,0 +1,14 @@
+<%-include('partials/header')-%>
+<section class="cabsec container">
+    <h1>See who's on the way!</h1>
+    <h5>Filter by Date:</h5>
+    <form action="/cabshare/find" method="POST">
+        <div class="form-group">
+            <input type="date" class="form-control" placeholder="Enter date of your ride" name="userdate">
+        </div>
+        <button type="submit" class="btn btn-dark btn-lg">Go Ahead!</button>
+    </form>
+</section>
+<%- include('partials/footer')-%>
+</body>
+</html>

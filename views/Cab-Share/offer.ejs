@@ -1,6 +1,6 @@
-<%-include('partials/header')-%>
+<%-include('../partials/header')-%>
 <section class="cabsec container">
-    <form action="/cabshare" method="POST" autocomplete="off">
+    <form action="/cabshare/offer" method="POST" autocomplete="off">
         <div class="form-group">
             <label>Date of the ride</label>
             <input type="date" class="form-control" placeholder="Enter date of your ride" name="date">
@@ -28,6 +28,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 </section>
-<%-include('partials/footer')-%>
+<%-include('../partials/footer')-%>
 </body>
 </html>
