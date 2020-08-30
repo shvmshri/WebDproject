@@ -19,10 +19,6 @@ app.get("/",function(req,res){
     res.render("home");
 })
 
-app.get("/buysell",function(req,res){
-    res.render("Buy-Sell/home");
-})
-
 app.get("/faculty",function(req,res){
     res.render("Faculty/home");
 })
@@ -82,7 +78,18 @@ app.post("/cabshare/find",function(req,res){
     
 });
 
-//
+// Buy-Sell
+app.get("/buysell",function(req,res){
+    res.render("Buy-Sell/home");
+})
+
+
+
+
+
+
+
+// 
 app.use((req,res,next)=>{
     res.send("NOT FOUND");
 })

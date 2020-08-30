@@ -10,7 +10,10 @@ var cab = new Schema({
         type:String,
         required:true
     },
-    Email:String,
+    Email:{
+        type:String,
+        default:undefined,
+    },
     Phone_no:{
         type:String,
         required:true
@@ -19,7 +22,10 @@ var cab = new Schema({
         type:String,
         required:true
     },
-    Departure_time:String
+    Departure_time:{
+        type:String,
+        default:undefined,
+    }
 })
 
 var Cab=mongoose.model("cab",cab);
