@@ -82,10 +82,13 @@ app.post("/cabshare/find",function(req,res){
 app.get("/buysell",function(req,res){
     res.render("Buy-Sell/home");
 })
-
-
-
-
+app.get("/sell",function(req,res){
+    res.render("Buy-Sell/sell");
+})
+app.post("/sell",function(req,res){
+    var object = req.body;
+    console.log(object);
+})
 
 
 
