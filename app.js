@@ -79,6 +79,33 @@ app.post("/cabshare/find",function(req,res){
 });
 
 // Buy-Sell
+const sellSchema = new mongoose.Schema({
+    Name:{
+        type:String,
+        required:true
+    },
+    Email:{
+        type:String,
+        required:true
+    },
+    Phone_no:
+        {
+            type:String,
+            required:true
+        },
+    Item_name:{
+        type:String,
+        required:true
+    },
+    Category:{
+        type:String,
+        required:true
+    },
+    Specifications:String
+});
+const Sell = new mongoose.model("sell",sellSchema);
+
+
 app.get("/buysell",function(req,res){
     res.render("Buy-Sell/home");
 })
@@ -88,8 +115,30 @@ app.get("/sell",function(req,res){
 app.post("/sell",function(req,res){
     var object = req.body;
     console.log(object);
-})
-
+    var sell = new Sell({
+        Name:object.name,
+        Email:object.email,
+        Phone_no:object.phone_no,
+        Item_name:object.item_name,
+        Category:object.category,
+        Specifications:object.specifications
+    });
+    sell.save()
+    .then(()=>{
+        res.redirect("/buysell");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
+                                            //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
+    })
+    .catch((err)=>{
+        res.send(false)
+    })
+});
+app.post("/buy",function(req,res){
+    var object = req.body;
+    console.log(object);
+    Sell.find({ Category: { $in: object.category } },function(err,array){
+        if(!err) res.render("Buy-Sell/sellCards",{array:array});
+    })
+});
 
 
 // 

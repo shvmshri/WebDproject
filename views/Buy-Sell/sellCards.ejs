@@ -1,0 +1,25 @@
+<%-include('../partials/header')-%>
+<section class="cabsec container">
+ <% if(array.length === 0){ %>
+   <h2>No products available!</h2>
+     <% } %> 
+        <% if(array.length != 0){ %>
+         <div class="row">
+          <% array.forEach(function(e){ %>
+            <div class="col-lg-4 col-md-6">
+              <div class="card">
+                  <div class="card-header">
+                    <%= e.Item_name %> 
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title"><%=e.Name%> </h5>
+                    <h5 class="card-title"><%=e.Email%></h5>
+                    <h5 class="card-title"><%= e.Phone_no %> </h5>
+                    <p class="card-text"><%= e.Specifications %></p>
+                  </div>
+                </div>
+            </div>
+          <% }) %>
+        </div>      
+      <% } %> 
+</section>
