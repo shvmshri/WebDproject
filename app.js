@@ -5,7 +5,11 @@ const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+const multer = require('multer');
 const Cab = require("./models/cabSchema");
+const fs = require('fs');
+const path = require('path');
+
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -79,6 +83,17 @@ app.post("/cabshare/find",function(req,res){
 });
 
 // Buy-Sell
+var storage = multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,"uploads");
+    },
+    filename:function(req,file,cb){
+        cb(null,file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+    }
+})
+var upload = multer({storage:storage});
+
+
 const sellSchema = new mongoose.Schema({
     Name:{
         type:String,
@@ -101,7 +116,11 @@ const sellSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Specifications:String
+    Specifications:String,
+    Image:[{
+        data:Buffer,
+        contentType:String
+    }]
 });
 const Sell = new mongoose.model("sell",sellSchema);
 
@@ -112,21 +131,35 @@ app.get("/buysell",function(req,res){
 app.get("/sell",function(req,res){
     res.render("Buy-Sell/sell");
 })
-app.post("/sell",function(req,res){
+app.post("/sell",upload.array('Images',4),function(req,res){
     var object = req.body;
+    var images = [];
     console.log(object);
+    console.log(req.files);
+    req.files.forEach(function(e){
+        var img = fs.readFileSync(e.path);
+        var encode_img = img.toString('base64');
+        var finalImg = {
+            data:  Buffer.from(encode_img,'base64'),
+            contentType: e.mimetype
+        }
+         images.push(finalImg);
+    })
+  
+
     var sell = new Sell({
         Name:object.name,
         Email:object.email,
         Phone_no:object.phone_no,
         Item_name:object.item_name,
         Category:object.category,
-        Specifications:object.specifications
+        Specifications:object.specifications,
+        Image:images
     });
     sell.save()
     .then(()=>{
-        res.redirect("/buysell");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
-                                            //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
+      //  res.redirect("/buysell");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
+        res.send(req.files)                                    //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
     })
     .catch((err)=>{
         res.send(false)

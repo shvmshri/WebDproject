@@ -16,6 +16,17 @@
                     <h5 class="card-title"><%=e.Email%></h5>
                     <h5 class="card-title"><%= e.Phone_no %> </h5>
                     <p class="card-text"><%= e.Specifications %></p>
+                    <div>
+                      <% if(e.Image.length === 0){ %>
+                        <h2>No images available!</h2>
+                          <% } %> 
+                      <% if(e.Image.length != 0){ %>
+                      <h4>Images of the product:</h4>
+                      <% e.Image.forEach(function(img){ %>
+                            <img src="data:Image/<%= img.contentType %>;base64,<%= img.data.toString('base64') %>">
+                     <% }) %> 
+                      <% } %> 
+                    </div>
                   </div>
                 </div>
             </div>

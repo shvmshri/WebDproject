@@ -1,6 +1,6 @@
 <%-include('../partials/header')-%>
 <section class="cabsec container">
-    <form action="/sell" method="POST" autocomplete="off">
+    <form action="/sell" method="POST" autocomplete="off" enctype="multipart/form-data">
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" placeholder="Enter your name" name="name">
@@ -47,6 +47,10 @@
         <div class="form-group">
             <label>Item Specifications:</label>
             <textarea rows="3" class="form-control" name="specifications"></textarea>
+        </div>
+        <div>
+          <h3>Upload pictures of the product</h3>
+          <input type="file" accept="image/*" name="Images" multiple >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
