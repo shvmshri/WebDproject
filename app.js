@@ -9,6 +9,7 @@ const multer = require('multer');
 const Cab = require("./models/cabSchema");
 const fs = require('fs');
 const path = require('path');
+const { title } = require('process');
 
 
 
@@ -27,9 +28,7 @@ app.get("/faculty",function(req,res){
     res.render("Faculty/home");
 })
 
-app.get("/lostfound",function(req,res){
-    res.render("Lost-Found/home");
-})
+
 // cabshare
 app.get("/cabshare",function(req,res){
     res.render("Cab-Share/home");
@@ -173,8 +172,75 @@ app.post("/buy",function(req,res){
     })
 });
 
+//  Lost-Found
+const lfSchema = new mongoose.Schema({
+    Name:{
+        type:String,
+        required:true
+    },
+    Email:{
+        type:String,
+        required:true
+    },
+    Phone_no:{
+        type:String,
+        required:true
+    },
+    Title:{
+        type:String,
+        required:true
+    },
+    Post:{
+        type:String,
+        required:true
+    },
+    Category:{
+        type:String,
+        required:true
+    }
+});
+const lostFound = new mongoose.model("lostFound",lfSchema);
+
+app.get("/lostfound",function(req,res){
+    lostFound.find({Category:"lost"},{Title:1,Post:1},function(err,lostarray){
+          if(!err){ 
+              lostFound.find({Category:"found"},{Title:1,Post:1},function(error,foundarray){
+               res.render("Lost-Found/home",{larray:lostarray,farray:foundarray})
+           });
+}
+    });
+});
+app.get("/lostfound/:id",function(req,res){
+    lostFound.findById(req.params.id,function(err,foundItem){
+        res.render("Lost-Found/post",{object:foundItem});
+    })
+})
+app.get("/lostfound/report",function(req,res){
+    res.render("Lost-Found/report");
+})
+app.post("/lostfound",function(req,res){
+ var formdata = req.body;
+ console.log(formdata);
+ var lostfound = new lostFound({
+     Name:formdata.name,
+     Email:formdata.email,
+     Phone_no:formdata.phone_no,
+     Category:formdata.category,
+     Title:formdata.title,
+     Post:formdata.post
+ });
+ lostfound.save()
+ .then(()=>{
+     res.redirect("/lostfound");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
+    // res.send(req.files)                                    //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
+ })
+ .catch((err)=>{
+     res.send(false)
+ })
+});
 
 // 
+
 app.use((req,res,next)=>{
     res.send("NOT FOUND");
 })

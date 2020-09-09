@@ -1,0 +1,50 @@
+<%-include('../partials/header')-%>
+<section class="cabsec container">
+    <form action="/lostfound" method="POST" autocomplete="off">
+            <label>Category:</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" value="lost">
+                <label class="form-check-label">Lost Item</label>
+            </div>
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" value="found">
+                <label class="form-check-label">Found Item</label>
+             </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" name="title" class="form-control" placeholder=" Item u found/lost">
+        </div>
+        <div class="form-group">
+          <label>Post</label>
+          <textarea  class="form-control" name="post" rows="3"></textarea>
+          <small class="form-text text-muted">Write the message you want us to post here.We suggest you to involve specifications of the item,where you lost/found it and in which condition.</small>
+        </div>
+        <br><br>
+        <div>
+            <h4>Personal Details:</h4>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" name="email" class="form-control" placeholder="Your email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Phone No.</label>
+                <div class="col-sm-10">
+                  <input type="tel" name="phone_no" class="form-control" placeholder="Your contact no.">
+                </div>
+              </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</section>
+<%- include('../partials/footer')-%>
+</body>
+</html>
