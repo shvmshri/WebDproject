@@ -7,6 +7,17 @@
    <h5>Name : <%= object.Name %> </h5>
    <h5>Email: <%= object.Email %> </h5>
    <h5>Phone_no: <%= object.Phone_no %> </h5>
+   <div>
+      <% if(object.Image.length === 0){ %>
+        <h2>No images available!</h2>
+          <% } %> 
+      <% if(object.Image.length != 0){ %>
+      <h4>Images of the <%= object.Category %> item:</h4>
+      <% object.Image.forEach(function(img){ %>
+            <img src="data:Image/<%= img.contentType %>;base64,<%= img.data.toString('base64') %>">
+     <% }) %> 
+      <% } %> 
+    </div>
 </section>
 <%- include('../partials/footer')-%>
 </body>

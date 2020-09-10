@@ -1,6 +1,6 @@
 <%-include('../partials/header')-%>
 <section class="cabsec container">
-    <form action="/lostfound" method="POST" autocomplete="off">
+    <form action="/lostfound" method="POST" autocomplete="off" enctype="multipart/form-data">
             <label>Category:</label>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="category" value="lost">
@@ -19,7 +19,12 @@
           <textarea  class="form-control" name="post" rows="3"></textarea>
           <small class="form-text text-muted">Write the message you want us to post here.We suggest you to involve specifications of the item,where you lost/found it and in which condition.</small>
         </div>
-        <br><br>
+        <div class="form-group">
+          <label>Upload some images of the item:</label>
+          <input type="file" accept="image/*" name="lfImages" class="form-control" multiple>
+        </div>
+
+        <br><br><br>
         <div>
             <h4>Personal Details:</h4>
             <div class="form-group row">

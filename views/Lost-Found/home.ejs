@@ -6,11 +6,11 @@
     <a href="#lost" class="btn btn-lg btn-outline-secondary">Lost Items</a>
     <a href="#found" class="btn btn-lg btn-secondary">Found Items</a>
 </div>
-<div id="lost">
-<h4>Lost items store!</h4>
+<section id="lost">
+<h4>Lost items store</h4>
 <h6>Did u found something in the hall? Check out our lost items store. Maybe u can find the person claimimg it!</h6>
 <% larray.forEach(e => { %>
-    <div>
+    <div style="border: 1px solid green;">
         <h3><%= e.Title %> </h3>
         <p><%= e.Post.substring(0,100) %> ..<a href="/lostfound/<%= e._id %>">Read more</a> </p>
     </div>
@@ -18,13 +18,13 @@
 
 <h6>If you couldn't find anyone claiming for the product .Do file your own report.Someone will reach you soon.</h6>
 <a href="/lostfound/report" class="btn btn-warning">Report now!</a>
-</div>
+</section>
 
-<div id="found">
+<section id="found">
 <h4>Found items store</h4>
 <h6>U lost something?Somebody might have found it. Check out our found items store now! </h6>
 <% farray.forEach(e => { %>
-    <div>
+    <div style="border: 1px solid green;">
         <h3><%= e.Title %> </h3>
         <p><%= e.Post.substring(0,100) %> ..<a href="/lostfound/<%= e._id %>">Read more</a> </p>
     </div>
@@ -32,7 +32,7 @@
 
 <h6>Couldn't found your lost item here?No worries ! File your own report.</h6>
 <a href="/lostfound/report" class="btn btn-warning">Report now!</a>
-</div>
+</section>
 
 </section>
 

@@ -9,7 +9,6 @@ const multer = require('multer');
 const Cab = require("./models/cabSchema");
 const fs = require('fs');
 const path = require('path');
-const { title } = require('process');
 
 
 
@@ -197,7 +196,11 @@ const lfSchema = new mongoose.Schema({
     Category:{
         type:String,
         required:true
-    }
+    },
+    Image:[{
+        data:Buffer,
+        contentType:String
+    }]
 });
 const lostFound = new mongoose.model("lostFound",lfSchema);
 
@@ -211,15 +214,31 @@ app.get("/lostfound",function(req,res){
     });
 });
 app.get("/lostfound/:id",function(req,res){
+    if(req.params.id==="report") res.render("Lost-Found/report");
+    else{
     lostFound.findById(req.params.id,function(err,foundItem){
         res.render("Lost-Found/post",{object:foundItem});
     })
-})
-app.get("/lostfound/report",function(req,res){
-    res.render("Lost-Found/report");
-})
-app.post("/lostfound",function(req,res){
+}
+});
+
+// app.get("/lostfound/report",function(req,res){
+//     res.render("Lost-Found/report");
+// })
+
+app.post("/lostfound",upload.array('lfImages',4),function(req,res){
  var formdata = req.body;
+ var images = [];
+ console.log(req.files);
+ req.files.forEach(function(e){
+     var img = fs.readFileSync(e.path);
+     var encode_img = img.toString('base64');
+     var finalImg = {
+         data:  Buffer.from(encode_img,'base64'),
+         contentType: e.mimetype
+     }
+      images.push(finalImg);
+ })
  console.log(formdata);
  var lostfound = new lostFound({
      Name:formdata.name,
@@ -227,12 +246,13 @@ app.post("/lostfound",function(req,res){
      Phone_no:formdata.phone_no,
      Category:formdata.category,
      Title:formdata.title,
-     Post:formdata.post
+     Post:formdata.post,
+     Image:images
  });
  lostfound.save()
  .then(()=>{
-     res.redirect("/lostfound");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
-    // res.send(req.files)                                    //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
+  //   res.redirect("/lostfound");           //yahan success page ko render krna h agr save ho jata h toh vrna false ya btana h 
+     res.send(req.files)                                    //db ke saare methods asynchronous hote uppar vali line chahe run na bhi huyi ho toh bhi next line chl jati h
  })
  .catch((err)=>{
      res.send(false)
